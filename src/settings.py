@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #Meus apps : 
     'src.core',
-    #Apps de terceiros :
+    'src.project_auth',
+    'src.product',
+    #Apps de terceiros :    
     'rest_framework',
+    "rest_framework.authtoken",
 
     
 ]
@@ -133,7 +136,15 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    'DEFAULT_PERMISSION_CLASSES': [                
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        
+    ],
 }
+
+# AUTH_USER_MODEL = 'project_auth.User'
+
+#  Token : a9aff7d2d96d21272cedf1c1e4450ec19037360a
