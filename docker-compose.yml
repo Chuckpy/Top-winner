@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   
-  web:
+  web:    
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -11,9 +11,12 @@ services:
       - 8000:8000
     depends_on:
       - db
+      - messager
     tty: true
+    container_name: ${COMPOSE_PROJECT_NAME}_app
 
   db:
+    container_name: ${COMPOSE_PROJECT_NAME}_db
     image: postgres:14
     environment:
       - POSTGRES_USER=postgres
@@ -21,5 +24,13 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
+  messager:
+    container_name: ${COMPOSE_PROJECT_NAME}_celery_broker
+    image: rabbitmq:management
+    ports:
+      - 5672:5672
+      - 8080:15672
+      - 25676:25676
+          
 volumes:
   postgres_data:

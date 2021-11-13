@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from .api import RegisterView, SignInView, sign_out
 
 

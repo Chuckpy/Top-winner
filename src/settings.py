@@ -42,11 +42,10 @@ INSTALLED_APPS = [
     'src.core',
     'src.project_auth',
     'src.product',
-    #Apps de terceiros :    
+    #Apps de terceiros :   
+    'django_celery_results',
     'rest_framework',
-    "rest_framework.authtoken",
-
-    
+    "rest_framework.authtoken",    
 ]
 
 MIDDLEWARE = [
@@ -147,4 +146,27 @@ REST_FRAMEWORK = {
 
 # AUTH_USER_MODEL = 'project_auth.User'
 
-#  Token : a9aff7d2d96d21272cedf1c1e4450ec19037360a
+# Celery config
+
+
+CELERY_TASK_SERIALIZER= "json"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_RESULT_SERIALIZER= "json"
+CELERY_RESULT_BACKEND= None
+CELERY_TIMEZONE= "UTC"
+CELERY_ENABLE_UTC= True
+CELERY_ENABLE_REMOTE_CONTROL= False
+CELERY_BROKER_URL = "amqp://guest:guest@messager:5672"
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_RESULT_BACKEND = 'django-cache'
+
+# celery setting.
+CELERY_CACHE_BACKEND = 'default'
+
+# django setting.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+    }
+}

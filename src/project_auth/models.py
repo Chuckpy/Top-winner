@@ -11,7 +11,7 @@ class Customer(User):
     image = models.ImageField(null=True, blank=True, upload_to="uploads/user/img/")
     phone_number = models.CharField(max_length=20)
     cpf = models.CharField(max_length=14, unique=True)
-    date_of_birth = models.CharField(max_length=30, blank=True, null=True, default=None)
+    date_of_birth = models.CharField(max_length=30, blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIREMENTS_FIELD = ['username','password']
